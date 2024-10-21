@@ -1,8 +1,11 @@
+package search;
+
+import entity.Entity;
 import field.Coordinates;
 import field.Field;
 
-import java.util.Map;
+import java.util.List;
 
 public interface Search {
-    Map<Coordinates, Coordinates> breadthFirstSearch(Field field, Coordinates begin, Class<?> target);
+    List<Coordinates> execute(Field field, Coordinates begin, Class<? extends Entity> target);
 }
