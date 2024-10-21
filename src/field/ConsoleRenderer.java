@@ -1,3 +1,5 @@
+package field;
+
 import entity.*;
 import entity.creature.Shark;
 import entity.creature.Turtle;
@@ -5,8 +7,6 @@ import entity.stationary.Coral;
 import entity.stationary.Sea;
 import entity.stationary.Seaweed;
 import entity.stationary.Shell;
-import field.Coordinates;
-import field.Field;
 
 public class ConsoleRenderer {
     private final String SHELL = "\uD83D\uDC1A";
@@ -18,8 +18,8 @@ public class ConsoleRenderer {
     private final String TURTLE = "\uD83D\uDC22";
 
     public void render(Field field) {
-        for (int row = 0; row < field.getRows(); row++) {
-            for (int column = 0; column < field.getColumns(); column++) {
+        for (int row = 0; row < field.getHeight(); row++) {
+            for (int column = 0; column < field.getWidth(); column++) {
                 Entity currentEntity = field.getEntity(new Coordinates(row, column));
                 System.out.print(getSpriteForEntity(currentEntity));
             }
