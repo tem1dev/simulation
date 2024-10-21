@@ -1,5 +1,8 @@
-import entity.Coordinates;
+package field;
+
 import entity.Entity;
+import entity.creature.Creature;
+import entity.creature.Turtle;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -8,13 +11,13 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Field {
-    private final int rows;
-    private final int columns;
+    private final int height;
+    private final int width;
     private final Map<Coordinates, Entity> field;
 
     public Field(int rows, int columns) {
-        this.rows = rows;
-        this.columns = columns;
+        this.height = rows;
+        this.width = columns;
         this.field = new HashMap<>(rows * columns);
     }
 
@@ -30,25 +33,28 @@ public class Field {
     }
 
     public void removeEntity(Coordinates coordinates) {
-        field.remove(coordinates);
+        if (containsEntity(coordinates)) {
+            field.remove(coordinates);
+        }
+        throw new NoSuchElementException("Field doesn't contain entity on these coordinates");
     }
 
-    public int getRows() {
-        return this.rows;
+    public int getHeight() {
+        return this.height;
     }
 
-    public int getColumns() {
-        return this.columns;
+    public int getWidth() {
+        return this.width;
     }
 
     private boolean containsEntity(Coordinates coordinates) {
         return !(field.get(coordinates) == null);
     }
 
-    public List getFreeCoordinates() {
+    public List<Coordinates> getFreeCoordinates() {
         List<Coordinates> freeCoordinates = new ArrayList<>();
-        for (int row = 0; row < rows; row++) {
-            for (int column = 0; column < columns; column++) {
+        for (int row = 0; row < height; row++) {
+            for (int column = 0; column < width; column++) {
                 Coordinates currentCoordinates = new Coordinates(row, column);
                 if (!containsEntity(currentCoordinates)) {
                     freeCoordinates.add(currentCoordinates);
@@ -56,6 +62,28 @@ public class Field {
             }
         }
         return freeCoordinates;
+    }
+
+    public List<Creature> getAllCreaturesOnField() {
+        List<Creature> creatures = new ArrayList<>();
+        for (int row = 0; row < getHeight(); row++) {
+            for (int column = 0; column < getWidth(); column++) {
+                Entity entity = getEntity(new Coordinates(row, column));
+                if (entity instanceof Creature creature) {
+                    creatures.add(creature);
+                }
+            }
+        }
+        return creatures;
+    }
+
+    public boolean containsTurtles() {
+        for (Creature creature : getAllCreaturesOnField()) {
+            if (creature instanceof Turtle) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
