@@ -1,14 +1,16 @@
 import field.ConsoleRenderer;
 import field.Field;
 import action.*;
+import field.FieldManager;
 
 public class Simulation {
-    private static final int INITIAL_VALUE_OF_STEPS = 0;
+    private static final int INITIAL_VALUE_OF_STEPS = 1;
     private static final String FINAL_TEXT = "Simulation end.";
-    private final Action randomPlaceEntitiesOnField = new RandomPlaceEntitiesOnField();
-    private final Action makeMoveAllCreatures = new MakeMoveAllCreatures();
-    private Field field;
-    private ConsoleRenderer consoleRenderer;
+    private final FieldManager fieldManager = new FieldManager();
+    private final Action randomEntityPlacer = new RandomEntityPlacer();
+    private final Action allCreaturesMover = new AllCreaturesMover(fieldManager);
+    private final ConsoleRenderer consoleRenderer;
+    private final Field field;
     private int steps;
 
     public Simulation(Field field, ConsoleRenderer consoleRenderer) {
@@ -17,24 +19,25 @@ public class Simulation {
         this.steps = INITIAL_VALUE_OF_STEPS;
     }
 
-    public void startSimulation() throws InterruptedException {
-        randomPlaceEntitiesOnField.execute(field);
-        while (field.containsTurtles()) {
+    public void start() throws InterruptedException {
+        randomEntityPlacer.execute(field);
+        while (fieldManager.containsTurtles(field)) {
             showInformationAboutSteps();
             nextTurn();
             Thread.sleep(1200);
         }
+        showInformationAboutSteps();
         consoleRenderer.render(field);
         System.out.println(FINAL_TEXT);
     }
 
-    public void nextTurn() {
+    private void nextTurn() {
         consoleRenderer.render(field);
-        makeMoveAllCreatures.execute(field);
+        allCreaturesMover.execute(field);
         steps++;
     }
 
-    public void showInformationAboutSteps() {
+    private void showInformationAboutSteps() {
         System.out.println("Step: " + steps);
     }
 }
