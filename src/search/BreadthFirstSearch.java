@@ -1,8 +1,9 @@
 package search;
 
+import coordinates.CoordinatesNavigator;
+import coordinates.Coordinates;
 import entity.Entity;
 import entity.stationary.Sea;
-import field.Coordinates;
 import field.Field;
 
 import java.util.*;
@@ -25,9 +26,15 @@ public class BreadthFirstSearch implements Search {
                 break;
             }
             Coordinates currentCoordinates = searchQueue.poll();
-            for (Coordinates neighbor : Coordinates.getAvailableCoordinates(field, currentCoordinates)) {
+            for (Coordinates neighbor : CoordinatesNavigator.getAvailableCoordinates(field, currentCoordinates)) {
                 if (!usedCoordinates.contains(neighbor)) {
-                    Entity currentEntity = field.getEntity(neighbor);
+                    Entity currentEntity;
+                    if (!field.containsEntity(neighbor)) {
+                        currentEntity = new Sea();
+                    } else {
+                        currentEntity = field.getEntity(neighbor);
+                    }
+
                     if (currentEntity instanceof Sea) {
                         pathToTarget.put(neighbor, currentCoordinates);
                         searchQueue.add(neighbor);
