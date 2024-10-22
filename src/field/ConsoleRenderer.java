@@ -1,5 +1,6 @@
 package field;
 
+import coordinates.Coordinates;
 import entity.*;
 import entity.creature.Shark;
 import entity.creature.Turtle;
@@ -7,6 +8,8 @@ import entity.stationary.Coral;
 import entity.stationary.Sea;
 import entity.stationary.Seaweed;
 import entity.stationary.Shell;
+
+import java.util.NoSuchElementException;
 
 public class ConsoleRenderer {
     private final String SHELL = "\uD83D\uDC1A";
@@ -20,8 +23,12 @@ public class ConsoleRenderer {
     public void render(Field field) {
         for (int row = 0; row < field.getHeight(); row++) {
             for (int column = 0; column < field.getWidth(); column++) {
-                Entity currentEntity = field.getEntity(new Coordinates(row, column));
-                System.out.print(getSpriteForEntity(currentEntity));
+                try {
+                    Entity currentEntity = field.getEntity(new Coordinates(row, column));
+                    System.out.print(getSpriteForEntity(currentEntity));
+                } catch (NoSuchElementException e) {
+                    System.out.print(getSpriteForEntity(new Sea()));
+                }
             }
             System.out.println();
         }
