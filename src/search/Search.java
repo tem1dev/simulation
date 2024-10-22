@@ -1,7 +1,7 @@
 package search;
 
+import coordinates.Coordinates;
 import entity.Entity;
-import field.Coordinates;
 import field.Field;
 
 import java.util.List;
