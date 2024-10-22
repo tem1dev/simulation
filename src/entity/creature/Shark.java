@@ -1,12 +1,10 @@
 package entity.creature;
 
+import coordinates.Coordinates;
 import entity.Entity;
 import entity.stationary.Sea;
-import field.Coordinates;
 import field.Field;
-import search.PathFinder;
-
-import java.util.List;
+import search.Search;
 
 public class Shark extends Creature {
     private static final int SPEED = 4;
@@ -14,30 +12,21 @@ public class Shark extends Creature {
     private static final Class<? extends Entity> FOOD = Turtle.class;
     private static final int ATTACK = 20;
 
-    public Shark(Coordinates coordinates) {
-        super(SPEED, HEALTH, FOOD, coordinates);
+    public Shark(Coordinates coordinates, Search pathFinder) {
+        super(SPEED, HEALTH, FOOD, coordinates, pathFinder);
     }
 
     @Override
-    public void makeMove(Field field) {
-        PathFinder pathFinder = new PathFinder();
-        for (int step = 0; step < getSpeed(); step++) {
-            List<Coordinates> pathToTarget = pathFinder.get(field, getCoordinates(), FOOD);
-            if (pathToTarget.size() < 2) {
+    public void moving(Field field, Coordinates nextStep, Entity currentEntity) {
+        if (currentEntity.getClass().isAssignableFrom(getFood())) {
+            int targetHealth = ((Turtle) (currentEntity)).getHealth() - ATTACK;
+            if (targetHealth > 0) {
+                ((Turtle) (currentEntity)).setHealth(targetHealth);
                 return;
             }
-            Coordinates nextStep = pathToTarget.get(1);
-            Entity currentEntity = field.getEntity(nextStep);
-            if (currentEntity.getClass().isAssignableFrom(getFood())) {
-                int targetHealth = ((Turtle) (currentEntity)).getHealth() - ATTACK;
-                if (targetHealth > 0) {
-                    ((Turtle) (currentEntity)).setHealth(targetHealth);
-                    return;
-                }
-            }
-            field.setEntity(new Sea(), getCoordinates());
-            setCoordinates(nextStep);
-            field.setEntity(this, nextStep);
         }
+        field.setEntity(new Sea(), getCoordinates());
+        setCoordinates(nextStep);
+        field.setEntity(this, nextStep);
     }
 }
