@@ -1,4 +1,3 @@
-import field.ConsoleRenderer;
 import field.Field;
 import action.*;
 import field.FieldManager;

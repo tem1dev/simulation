@@ -1,5 +1,3 @@
-package field;
-
 import coordinates.Coordinates;
 import entity.*;
 import entity.creature.Shark;
@@ -8,6 +6,7 @@ import entity.stationary.Coral;
 import entity.stationary.Sea;
 import entity.stationary.Seaweed;
 import entity.stationary.Shell;
+import field.Field;
 
 import java.util.NoSuchElementException;
 
