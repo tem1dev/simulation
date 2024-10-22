@@ -6,6 +6,6 @@ public class Main {
         Field field = new Field(10, 30);
         ConsoleRenderer consoleRenderer = new ConsoleRenderer();
         Simulation simulation = new Simulation(field, consoleRenderer);
-        simulation.startSimulation();
+        simulation.start();
     }
 }
