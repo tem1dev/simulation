@@ -1,11 +1,10 @@
-package main.java.action.action;
+package main.java.action;
 
-import main.java.action.Coordinates;
-import main.java.action.Field;
-import main.java.action.entity.Entity;
-import main.java.action.entity.stationary.*;
-import main.java.action.entity.creature.*;
-import main.java.action.search.BreadthFirstSearch;
+import main.java.Coordinates;
+import main.java.Field;
+import main.java.entity.stationary.*;
+import main.java.entity.creature.*;
+import main.java.search.BreadthFirstSearch;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,7 +43,7 @@ public class RandomEntityPlacer implements Action {
         }
         // place turtles
         for (int i = 0; i < COUNTER_OF_TURTLES; i++) {
-            main.java.action.Coordinates coordinates = iterator.next();
+            Coordinates coordinates = iterator.next();
             field.setEntity(new Turtle(coordinates, new BreadthFirstSearch()), coordinates);
         }
         // place sharks
@@ -54,12 +53,12 @@ public class RandomEntityPlacer implements Action {
         }
     }
 
-    private List<main.java.action.Coordinates> getFreeCoordinates(Field field) {
+    private List<Coordinates> getFreeCoordinates(Field field) {
         List<Coordinates> freeCoordinates = new ArrayList<>();
         for (int row = 0; row < field.getHeight(); row++) {
             for (int column = 0; column < field.getWidth(); column++) {
-                main.java.action.Coordinates currentCoordinates = new main.java.action.Coordinates(row, column);
-                if (!field.containsEntity(currentCoordinates)) {
+                Coordinates currentCoordinates = new Coordinates(row, column);
+                if (field.isEmptySquare(currentCoordinates)) {
                     freeCoordinates.add(currentCoordinates);
                 }
             }
