@@ -1,10 +1,10 @@
-package main.java.action.entity.creature;
+package main.java.entity.creature;
 
-import main.java.action.Coordinates;
-import main.java.action.entity.Entity;
-import main.java.action.entity.stationary.Sea;
-import main.java.action.Field;
-import main.java.action.search.Search;
+import main.java.Coordinates;
+import main.java.entity.Entity;
+import main.java.entity.stationary.Sea;
+import main.java.Field;
+import main.java.search.Search;
 
 public class Shark extends Creature {
     private static final int SPEED = 4;
@@ -17,7 +17,7 @@ public class Shark extends Creature {
     }
 
     @Override
-    public void moving(Field field, main.java.action.Coordinates nextStep, Entity currentEntity) {
+    public void moving(Field field, Coordinates nextStep, Entity currentEntity) {
         if (currentEntity.getClass().isAssignableFrom(getFood())) {
             int targetHealth = ((Turtle) (currentEntity)).getHealth() - ATTACK;
             if (targetHealth > 0) {

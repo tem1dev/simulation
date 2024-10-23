@@ -1,9 +1,9 @@
-package main.java.action;
+package main.java;
 
-import main.java.action.action.Action;
-import main.java.action.action.AllCreaturesMover;
-import main.java.action.action.RandomEntityPlacer;
-import main.java.action.entity.creature.Turtle;
+import main.java.action.Action;
+import main.java.action.AllCreaturesMover;
+import main.java.action.RandomEntityPlacer;
+import main.java.entity.creature.Turtle;
 
 public class Simulation {
     private static final int INITIAL_VALUE_OF_STEPS = 1;
