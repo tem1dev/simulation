@@ -1,4 +1,4 @@
-package coordinates;
+package main.java.action;
 
 import java.util.Objects;
 
