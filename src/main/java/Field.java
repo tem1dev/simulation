@@ -1,6 +1,6 @@
-package main.java.action;
+package main.java;
 
-import main.java.action.entity.Entity;
+import main.java.entity.Entity;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -26,17 +26,17 @@ public class Field {
     }
 
     public Entity getEntity(Coordinates coordinates) {
-        if (containsEntity(coordinates)) {
-            return field.get(coordinates);
+        if (isEmptySquare(coordinates)) {
+            throw new NoSuchElementException("Field doesn't contain entity on these coordinates");
         }
-        throw new NoSuchElementException("Field doesn't contain entity on these coordinates");
+        return field.get(coordinates);
     }
 
     public void removeEntity(Coordinates coordinates) {
-        if (containsEntity(coordinates)) {
-            field.remove(coordinates);
+        if (isEmptySquare(coordinates)) {
+            throw new NoSuchElementException("Field doesn't contain entity on these coordinates");
         }
-        throw new NoSuchElementException("Field doesn't contain entity on these coordinates");
+        field.remove(coordinates);
     }
 
     public int getHeight() {
@@ -47,8 +47,8 @@ public class Field {
         return this.width;
     }
 
-    public boolean containsEntity(Coordinates coordinates) {
-        return !(field.get(coordinates) == null);
+    public boolean isEmptySquare(Coordinates coordinates) {
+        return field.get(coordinates) == null;
     }
 
     public boolean isValidCoordinates(Coordinates coordinates) {
@@ -59,10 +59,6 @@ public class Field {
             return false;
         }
         return true;
-    }
-
-    public boolean isEmptySquare(Coordinates coordinates) {
-        return !containsEntity(coordinates);
     }
 }
 
