@@ -1,10 +1,9 @@
-package search;
+package main.java.action.search;
 
-import coordinates.CoordinatesNavigator;
-import coordinates.Coordinates;
-import entity.Entity;
-import entity.stationary.Sea;
-import field.Field;
+import main.java.action.Coordinates;
+import main.java.action.Field;
+import main.java.action.entity.Entity;
+import main.java.action.entity.stationary.Sea;
 
 import java.util.*;
 
@@ -26,7 +25,7 @@ public class BreadthFirstSearch implements Search {
                 break;
             }
             Coordinates currentCoordinates = searchQueue.poll();
-            for (Coordinates neighbor : CoordinatesNavigator.getAvailableCoordinates(field, currentCoordinates)) {
+            for (Coordinates neighbor : getAvailableCoordinates(field, currentCoordinates)) {
                 if (!usedCoordinates.contains(neighbor)) {
                     Entity currentEntity;
                     if (!field.containsEntity(neighbor)) {
@@ -61,5 +60,27 @@ public class BreadthFirstSearch implements Search {
         }
 
         return result;
+    }
+
+    private List<Coordinates> getAvailableCoordinates(Field field, Coordinates coordinates) {
+        List<Coordinates> availableCoordinates = new ArrayList<>();
+
+        int row = coordinates.getRow();
+        int column = coordinates.getColumn();
+
+        if (field.isValidCoordinates(new Coordinates(row + 1, column))) {
+            availableCoordinates.add(new Coordinates(row + 1, column));
+        }
+        if (field.isValidCoordinates(new Coordinates(row - 1, column))) {
+            availableCoordinates.add(new Coordinates(row - 1, column));
+        }
+        if (field.isValidCoordinates(new Coordinates(row, column + 1))) {
+            availableCoordinates.add(new Coordinates(row, column + 1));
+        }
+        if (field.isValidCoordinates(new Coordinates(row, column - 1))) {
+            availableCoordinates.add(new Coordinates(row, column - 1));
+        }
+
+        return availableCoordinates;
     }
 }
