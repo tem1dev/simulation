@@ -1,9 +1,9 @@
-package main.java.action.search;
+package main.java.search;
 
-import main.java.action.Coordinates;
-import main.java.action.Field;
-import main.java.action.entity.Entity;
-import main.java.action.entity.stationary.Sea;
+import main.java.Coordinates;
+import main.java.Field;
+import main.java.entity.Entity;
+import main.java.entity.stationary.Sea;
 
 import java.util.*;
 
@@ -28,7 +28,7 @@ public class BreadthFirstSearch implements Search {
             for (Coordinates neighbor : getAvailableCoordinates(field, currentCoordinates)) {
                 if (!usedCoordinates.contains(neighbor)) {
                     Entity currentEntity;
-                    if (!field.containsEntity(neighbor)) {
+                    if (field.isEmptySquare(neighbor)) {
                         currentEntity = new Sea();
                     } else {
                         currentEntity = field.getEntity(neighbor);
