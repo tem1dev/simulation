@@ -1,4 +1,4 @@
-package main.java.action.entity;
+package main.java.entity;
 
 public abstract class Entity {
 }

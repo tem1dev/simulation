@@ -1,10 +1,10 @@
-package main.java.action.entity.creature;
+package main.java.entity.creature;
 
-import main.java.action.entity.Entity;
-import main.java.action.Coordinates;
-import main.java.action.entity.stationary.Sea;
-import main.java.action.Field;
-import main.java.action.search.Search;
+import main.java.entity.Entity;
+import main.java.Coordinates;
+import main.java.entity.stationary.Sea;
+import main.java.Field;
+import main.java.search.Search;
 
 import java.util.List;
 
