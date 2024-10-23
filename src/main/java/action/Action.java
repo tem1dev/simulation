@@ -1,6 +1,6 @@
-package main.java.action.action;
+package main.java.action;
 
-import main.java.action.Field;
+import main.java.Field;
 
 public interface Action {
     void execute(Field field);
