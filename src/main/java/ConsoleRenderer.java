@@ -1,12 +1,12 @@
-package main.java.action;
+package main.java;
 
-import main.java.action.entity.*;
-import main.java.action.entity.creature.Shark;
-import main.java.action.entity.creature.Turtle;
-import main.java.action.entity.stationary.Coral;
-import main.java.action.entity.stationary.Sea;
-import main.java.action.entity.stationary.Seaweed;
-import main.java.action.entity.stationary.Shell;
+import main.java.entity.*;
+import main.java.entity.creature.Shark;
+import main.java.entity.creature.Turtle;
+import main.java.entity.stationary.Coral;
+import main.java.entity.stationary.Sea;
+import main.java.entity.stationary.Seaweed;
+import main.java.entity.stationary.Shell;
 
 public class ConsoleRenderer {
     private final String SHELL = "\uD83D\uDC1A";
