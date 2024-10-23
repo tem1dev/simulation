@@ -1,8 +1,9 @@
-package main.java.action.action;
+package main.java.action;
 
-import main.java.action.Field;
-import main.java.action.entity.Entity;
-import main.java.action.entity.creature.Creature;
+import main.java.Coordinates;
+import main.java.Field;
+import main.java.entity.creature.Creature;
+import main.java.entity.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,8 @@ public class AllCreaturesMover implements Action {
         List<Creature> creatures = new ArrayList<>();
         for (int row = 0; row < field.getHeight(); row++) {
             for (int column = 0; column < field.getWidth(); column++) {
-                if (field.containsEntity(new main.java.action.Coordinates(row, column))) {
-                    Entity entity = field.getEntity(new main.java.action.Coordinates(row, column));
+                if (!field.isEmptySquare(new Coordinates(row, column))) {
+                    Entity entity = field.getEntity(new Coordinates(row, column));
                     if (entity instanceof Creature creature) {
                         creatures.add(creature);
                     }
