@@ -1,4 +1,4 @@
-package main.java.action;
+package main.java;
 
 import java.util.Objects;
 
